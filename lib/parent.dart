@@ -6,12 +6,12 @@ import './child.dart';
     selector: 'parent-component',
     templateUrl: 'parent.html',
     directives: [
+      ChildComponent,
       formDirectives,
       CORE_DIRECTIVES,
     ]
 )
-class ParentComponent implements AfterViewInit{
-
+class ParentComponent implements AfterViewInit, AfterContentChecked, AfterContentInit{
 //  @ContentChildren(ChildComponent)
 //  List<ChildComponent> child;
 
@@ -21,9 +21,19 @@ class ParentComponent implements AfterViewInit{
   @ViewChildren(ChildComponent)
   List<ChildComponent> children;
 
+  @ContentChild(ChildComponent)
+  ChildComponent contentChild;
 
   ParentComponent(){
     print('ParentComponent init');
+  }
+
+  ngAfterContentInit(){
+    
+  }
+  ngAfterContentChecked(){
+    print('ngAfterContentChecked ${children} ${contentChild}');
+
   }
 
   @override
